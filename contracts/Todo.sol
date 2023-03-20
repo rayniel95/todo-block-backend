@@ -17,8 +17,12 @@ contract Todo {
         );
         todos[msg.sender][_id] = newText;    
     }
-    function getTodo() public view returns (string memory) {
-        
+    function getTodo(uint _id) public view returns (string memory) {
+        require(
+            bytes(todos[msg.sender][_id]).length != 0, 
+            "That todo does not exist"
+        );
+        return todos[msg.sender][_id];
     }
     function getTodos() public view returns (string[] memory) {
         
