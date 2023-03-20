@@ -4,6 +4,9 @@ pragma solidity ^0.8.9;
 contract Todo {
     uint internal id = 0;
     mapping (address => mapping (uint => string)) internal todos;
+    event TodoAdded(address _address, uint _id);
+    event TodoEdited(address _address, uint _id);
+    
     constructor() {}
 
     function addTodo(string memory text) public {
@@ -24,8 +27,8 @@ contract Todo {
         );
         return todos[msg.sender][_id];
     }
-    function getTodos() public view returns (string[] memory) {
-        
+    function getTodos() public view returns (mapping (uint => string) memory) {
+        return todos[msg.sender];
     }
     // NOTE - if delete array does not delete the element,
     // how is possible to save storage using the not deleted
