@@ -7,7 +7,7 @@ contract Todo {
     event TodoAdded(address _address, uint _id);
     event TodoEdited(address _address, uint _id);
     event TodoDeleted(address _address, uint _id);
-    
+
     constructor() {}
 
     function addTodo(string memory text) public {
@@ -34,7 +34,12 @@ contract Todo {
     // NOTE - if delete array does not delete the element,
     // how is possible to save storage using the not deleted
     // elements?
-    function deleteTodo() public {
-        
+    function deleteTodo(uint _id) public {
+        require(
+            bytes(todos[msg.sender][_id]).length != 0, 
+            "That todo does not exist"
+        );
+        delete todos[msg.sender][_id];
+        emit TodoDeleted(msg.sender, _id);
     }
 }
