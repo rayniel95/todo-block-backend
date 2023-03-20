@@ -7,20 +7,20 @@ contract Todo {
     constructor() {}
 
     function addTodo(string memory text) public {
-        require(
-            bytes(todos[msg.sender][id]).lenght == 0, 
-            "You are trying to add an existing todo"
-        );
         todos[msg.sender][id] = text;
         id++;
     }
-    function editTodo(uint id, string memory newText) public {
-        require(todos[msg.sender][id])
+    function editTodo(uint _id, string memory newText) public {
+        require(
+            bytes(todos[msg.sender][_id]).length != 0, 
+            "That todo does not exist"
+        );
+        todos[msg.sender][_id] = newText;    
     }
-    function getTodo() public view returns (TodoTask memory) {
+    function getTodo() public view returns (string memory) {
         
     }
-    function getTodos() public view returns (TodoTask[] memory) {
+    function getTodos() public view returns (string[] memory) {
         
     }
     // NOTE - if delete array does not delete the element,
