@@ -6,6 +6,7 @@ contract Todo {
     mapping (address => mapping (uint => string)) internal todos;
     event TodoAdded(address _address, uint _id);
     event TodoEdited(address _address, uint _id);
+    event TodoDeleted(address _address, uint _id);
     
     constructor() {}
 
