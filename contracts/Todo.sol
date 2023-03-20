@@ -12,6 +12,7 @@ contract Todo {
 
     function addTodo(string memory text) public {
         todos[msg.sender][id] = text;
+        emit TodoAdded(msg.sender, id);
         id++;
     }
     function editTodo(uint _id, string memory newText) public {
@@ -19,7 +20,8 @@ contract Todo {
             bytes(todos[msg.sender][_id]).length != 0, 
             "That todo does not exist"
         );
-        todos[msg.sender][_id] = newText;    
+        todos[msg.sender][_id] = newText; 
+        emit TodoEdited(msg.sender, _id);
     }
     function getTodo(uint _id) public view returns (string memory) {
         require(
