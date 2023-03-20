@@ -7,6 +7,10 @@ contract Todo {
     constructor() {}
 
     function addTodo(string memory text) public {
+        require(
+            bytes(todos[msg.sender][id]).lenght == 0, 
+            "You are trying to add an existing todo"
+        );
         todos[msg.sender][id] = text;
         id++;
     }
